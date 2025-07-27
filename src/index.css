@@ -17,3 +17,7 @@ code {
 .navbar-color{
   background-color: black!important;
 }
+
+.action-icon{
+  cursor: pointer;
+}

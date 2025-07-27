@@ -23,11 +23,64 @@ const NoteState = (props) => {
       timestamp: "2025-07-24T09:22:37.277Z",
       __v: 0,
     },
+    {
+      _id: "6880a123219a85a8e92114c50",
+      user: "687f909103d7f6cb00468eb6",
+      title: "My interview",
+      description:
+        "My interview will be scheduled at 1:00PM IST on 26th July. I will have to prepare for it very thouroughly. I will crack an intern and earn a large amount of money",
+      tag: "personal",
+      timestamp: "2025-07-23T08:45:23.833Z",
+      __v: 0,
+    },
+    {
+      _id: "6880a12319a85a82e92114c50",
+      user: "687f909103d7f6cb00468eb6",
+      title: "My interview",
+      description:
+        "My interview will be scheduled at 1:00PM IST on 26th July. I will have to prepare for it very thouroughly. I will crack an intern and earn a large amount of money",
+      tag: "personal",
+      timestamp: "2025-07-23T08:45:23.833Z",
+      __v: 0,
+    },
+    {
+      _id: "68280a12319a85a8e92114c50",
+      user: "687f909103d7f6cb00468eb6",
+      title: "My interview",
+      description:
+        "My interview will be scheduled at 1:00PM IST on 26th July. I will have to prepare for it very thouroughly. I will crack an intern and earn a large amount of money",
+      tag: "personal",
+      timestamp: "2025-07-23T08:45:23.833Z",
+      __v: 0,
+    }
   ];
 
   const [notes,setNotes] = useState(notesInitial)
+
+  //Add a note
+  const addNote = (title,description,tag)=>{
+    const note = {
+      "_id": "69280a12319a85a8e92114c50",
+      "user": "687f909103d7f6cb00468eb6",
+      "title": "My Life [added]",
+      "description":
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, reiciendis voluptates, atque eligendi repudiandae cupiditate sequi consequuntur tempora dolores debitis necessitatibus deserunt modi reprehenderit possimus vitae odio incidunt quos omnis.",
+      "timestamp": "2025-07-20T08:45:23.833Z",
+      "__v": 0,
+    };
+    setNotes(notes.push(note));
+  }
+  //delete a note
+  const deleteNote = (id)=>{
+
+  }
+  
+  //edit a note
+  const editNote = (id)=>{
+
+  }
   return (
-    <NoteContext.Provider value={{notes,setNotes}}>{props.children}</NoteContext.Provider>
+    <NoteContext.Provider value={{notes,addNote,deleteNote,editNote}}>{props.children}</NoteContext.Provider>
   );
 };
 
