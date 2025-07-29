@@ -1,4 +1,4 @@
-import { useState,useCallback } from "react";
+import { useState, useCallback } from "react";
 import NoteContext from "./noteContext";
 
 const NoteState = (props) => {
@@ -13,11 +13,12 @@ const NoteState = (props) => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjg3ZjkwOTEwM2Q3ZjZjYjAwNDY4ZWI2In0sImlhdCI6MTc1MzI0NDg5OH0._eCCcRurSI2w6ckUPmWAofQDcuw2oyV0L4DmBD6gc5g",
+        "auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjg3ZjkwOTEwM2Q3ZjZjYjAwNDY4ZWI2In0sImlhdCI6MTc1MzI0NDg5OH0._eCCcRurSI2w6ckUPmWAofQDcuw2oyV0L4DmBD6gc5g",
       },
     });
     const json = await response.json();
-    console.log(json)
+    console.log(json);
     setNotes(json);
   }, [host]);
 
@@ -49,7 +50,19 @@ const NoteState = (props) => {
   };
 
   // Delete a note
-  const deleteNote = (id) => {
+  const deleteNote = async (id) => {
+    //API call
+    const response = await fetch(`${host}/api/notes/api/notes/deletenote/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        "auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjg3ZjkwOTEwM2Q3ZjZjYjAwNDY4ZWI2In0sImlhdCI6MTc1MzI0NDg5OH0._eCCcRurSI2w6ckUPmWAofQDcuw2oyV0L4DmBD6gc5g",
+      }
+    });
+    const json = response.json();
+    console.log(json);
+    
     console.log("deleting a note " + id);
     const newNotes = notes.filter((note) => {
       return note._id !== id;
