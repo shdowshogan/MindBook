@@ -8,7 +8,7 @@ const NoteItem = (props) => {
   const { deleteNote } = context;
 
   return (
-    <div className="col-md-3">
+    <div className="d-flex justify-content-center flex-row mx-3">
       <div
         className="card my-3"
         style={{
