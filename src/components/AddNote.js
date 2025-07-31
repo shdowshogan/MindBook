@@ -6,10 +6,30 @@ const AddNote = () => {
   const {addNote } = context;
 
   const [note,setNote] = useState({title:"",description:"",tag:"default"})
+  const [errors,setErrors] = useState({title:"",description:""})
+
+  const validate = ()=>{
+    let isValid = true;
+    const newErrors = {title:"",description:""}
+
+    if(note.title.trim().length < 3){
+        newErrors.title = "The Title must be atleast 3 characters long!"
+        isValid = false;
+    }
+    if(note.description.trim().length < 5){
+        newErrors.description = "The Description must be atleast 5 characters long!"
+        isValid = false;
+    }
+    setErrors(newErrors);
+    return isValid;
+  }
 
   const handleClick = (e)=>{
     e.preventDefault();
-    addNote(note.title,note.description,note.tag);
+    if(validate()){
+        addNote(note.title,note.description,note.tag);
+        setNote({title:"",description:"",tag:"default"});
+    }
   }
 
   const onChange = (e)=>{
@@ -29,9 +49,11 @@ const AddNote = () => {
             className="form-control"
             id="title"
             name="title"
+            value={note.title}
             aria-describedby="emailHelp"
             onChange={onChange}
           />
+           {errors.title && <div className="text-danger mt-1">{errors.title}</div>}
         </div>
         <div className="container mb-3 w-25" style={{ minWidth: "300px" }}>
           <label htmlFor="description" className="form-label">
@@ -42,23 +64,11 @@ const AddNote = () => {
             className="form-control"
             id="description"
             name="description"
+            value={note.description}
             onChange={onChange}
           />
+          {errors.description && <div className="text-danger mt-1">{errors.description}</div>}
         </div>
-        {/* <div
-          className="container mb-3 w-25 form-check"
-          style={{ minWidth: "300px" }}
-        > */}
-          {/* <input
-            type="checkbox"
-            className="form-check-input"
-            id="exampleCheck1"
-            onChange={onChange}
-          />
-          <label className="form-check-label" for="exampleCheck1">
-            Remember Me😘
-          </label> */}
-        {/* </div> */}
         <div className="container mb-3 text-center">
           <button type="submit" className="w-25 btn btn-primary" onClick={handleClick}>
             Add this Note
