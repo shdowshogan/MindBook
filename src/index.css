@@ -35,3 +35,22 @@ code {
   transform: scale(1.02)!important;
   transition: all 0.3s ease-in-out!important;
 }
+
+.login-btn{
+  background: linear-gradient(to right, #00c6ff, #0072ff)!important;
+  border: none;
+  color: white;
+}
+.login-btn:hover{
+  box-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+.signup-btn {
+  background: linear-gradient(to right, #ff512f, #dd2476) !important;
+  border: 1px solid transparent;
+  color: white;
+}
+
+.signup-btn:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
