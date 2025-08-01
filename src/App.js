@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import { useState } from "react";
 import Alert from "./components/Alert";
 // import Alert from './components/Alert'
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -25,13 +26,21 @@ function App() {
   return (
     <NoteState showAlert={showAlert}>
       <BrowserRouter>
-        <Navbar/>
-        <Alert alert={alert}/>
+        <Navbar />
+        <Alert alert={alert} />
         <Routes>
-          <Route path="/Home" element={<Home showAlert={showAlert} />} />
+          <Route
+            path="/Home"
+            element={
+              <ProtectedRoute>
+                <Home showAlert={showAlert} />
+              </ProtectedRoute>
+            }
+          />
+          {/* <Route path="/Home" element={<Home showAlert={showAlert} />} /> */}
           <Route path="/About" element={<About />} />
-          <Route path="/Login" element={<Login showAlert={showAlert}/>} />
-          <Route path="/Signup" element={<Signup showAlert={showAlert}/>} />
+          <Route path="/Login" element={<Login showAlert={showAlert} />} />
+          <Route path="/Signup" element={<Signup showAlert={showAlert} />} />
           {/* <Route path="/Navbar" element={<Navbar/>} /> */}
         </Routes>
       </BrowserRouter>
