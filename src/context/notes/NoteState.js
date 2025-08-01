@@ -5,6 +5,11 @@ const NoteState = (props) => {
   const host = "http://localhost:5000";
   const notesInitial = [];
   const [notes, setNotes] = useState(notesInitial);
+  const [user, setUser] = useState({name:"",email:""});
+
+  const logout = () => {
+    setNotes([]);
+  };
 
   // get all notes
   const getNotes = useCallback(async () => {
@@ -89,9 +94,33 @@ const NoteState = (props) => {
     props.showAlert("Updated the Note", "success");
   };
 
+  //get user details
+  const getUser = async () => {
+    //API call
+    const response = await fetch(`${host}/api/auth/getuser`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      }
+    });
+    const json = await response.json();
+    console.log(json);
+    setUser(json);
+  };
+
   return (
     <NoteContext.Provider
-      value={{ notes, addNote, deleteNote, editNote, getNotes }}
+      value={{
+        notes,
+        addNote,
+        deleteNote,
+        editNote,
+        getNotes,
+        logout,
+        getUser,
+        user
+      }}
     >
       {props.children}
     </NoteContext.Provider>

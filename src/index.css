@@ -45,7 +45,7 @@ code {
   box-shadow: 0 0 10px rgba(255,255,255,0.3);
 }
 
-.signup-btn {
+.signup-btn,.logout-btn {
   background: linear-gradient(to right, #ff512f, #dd2476) !important;
   border: 1px solid transparent;
   color: white;
