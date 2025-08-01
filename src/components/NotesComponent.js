@@ -1,5 +1,6 @@
 import noteContext from "../context/notes/noteContext";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import NoteItem from "./NoteItem";
 import AddNote from "./AddNote";
 
@@ -8,6 +9,7 @@ const NotesComponent = () => {
   const { notes, getNotes, editNote } = context;
   const ref = useRef(null);
   const refClose = useRef(null);
+  let history = useNavigate();
 
   const [note, setNote] = useState({
     id: "",
@@ -36,8 +38,14 @@ const NotesComponent = () => {
   };
 
   useEffect(() => {
-    getNotes();
-  }, [getNotes]);
+    if(localStorage.getItem('token')){
+      getNotes();
+    }
+    else{
+      history('/login');
+    }
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <>
@@ -137,7 +145,7 @@ const NotesComponent = () => {
       </div>
 
       <div className="container d-flex flex-column align-items-center">
-        <h1>Your Notes</h1>
+        <h1><strong>Your Notes</strong></h1>
         <div className="d-flex flex-row justify-content-center flex-wrap">
           {notes.length === 0
             ? "No notes to display"

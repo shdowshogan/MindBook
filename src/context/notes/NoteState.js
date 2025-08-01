@@ -13,8 +13,7 @@ const NoteState = (props) => {
       method: "GET",
       headers: {
         "Content-type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjg3ZjkwOTEwM2Q3ZjZjYjAwNDY4ZWI2In0sImlhdCI6MTc1MzI0NDg5OH0._eCCcRurSI2w6ckUPmWAofQDcuw2oyV0L4DmBD6gc5g",
+        "auth-token": localStorage.getItem("token"),
       },
     });
     const json = await response.json();
@@ -29,15 +28,15 @@ const NoteState = (props) => {
       method: "POST",
       headers: {
         "Content-type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjg3ZjkwOTEwM2Q3ZjZjYjAwNDY4ZWI2In0sImlhdCI6MTc1MzI0NDg5OH0._eCCcRurSI2w6ckUPmWAofQDcuw2oyV0L4DmBD6gc5g",
+        "auth-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({ title, description, tag }),
     });
     const json = await response.json();
     console.log(json);
 
-    setNotes([json,...notes]);
+    setNotes([json, ...notes]);
+    props.showAlert("Added", "success");
   };
 
   // Delete a note
@@ -47,18 +46,18 @@ const NoteState = (props) => {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjg3ZjkwOTEwM2Q3ZjZjYjAwNDY4ZWI2In0sImlhdCI6MTc1MzI0NDg5OH0._eCCcRurSI2w6ckUPmWAofQDcuw2oyV0L4DmBD6gc5g",
-      }
+        "auth-token": localStorage.getItem("token"),
+      },
     });
     const json = response.json();
     console.log(json);
-    
+
     console.log("deleting a note " + id);
     const newNotes = notes.filter((note) => {
       return note._id !== id;
     });
     setNotes(newNotes);
+    props.showAlert("Deleted", "danger");
   };
 
   // Edit a note
@@ -68,15 +67,14 @@ const NoteState = (props) => {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjg3ZjkwOTEwM2Q3ZjZjYjAwNDY4ZWI2In0sImlhdCI6MTc1MzI0NDg5OH0._eCCcRurSI2w6ckUPmWAofQDcuw2oyV0L4DmBD6gc5g",
+        "auth-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({ title, description, tag }),
     });
     const json = response.json();
     console.log(json);
 
-    let newNotes = JSON.parse(JSON.stringify(notes))
+    let newNotes = JSON.parse(JSON.stringify(notes));
     // Logic to edit in client
     for (let index = 0; index < newNotes.length; index++) {
       const element = newNotes[index];
@@ -88,6 +86,7 @@ const NoteState = (props) => {
       }
     }
     setNotes(newNotes);
+    props.showAlert("Updated the Note", "success");
   };
 
   return (

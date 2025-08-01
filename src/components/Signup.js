@@ -17,7 +17,7 @@ const Signup = (props) => {
     });
     const json = await response.json();
     console.log(json);
-    if (json) {
+    if (json.authtoken) {
       localStorage.setItem("token", json.authtoken);
       //redirect
       history("/home");

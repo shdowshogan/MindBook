@@ -23,7 +23,7 @@ function App() {
     }, 1000);
   };
   return (
-    <NoteState>
+    <NoteState showAlert={showAlert}>
       <BrowserRouter>
         <Navbar/>
         <Alert alert={alert}/>
