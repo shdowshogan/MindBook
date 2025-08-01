@@ -27,7 +27,7 @@ const NotesComponent = () => {
   };
 
   const handleClick = (e) => {
-    editNote(note.id, note.etitle, note.edescription, note.etag)
+    editNote(note.id, note.etitle, note.edescription, note.etag);
     refClose.current.click();
   };
 
@@ -139,15 +139,17 @@ const NotesComponent = () => {
       <div className="container d-flex flex-column align-items-center">
         <h1>Your Notes</h1>
         <div className="d-flex flex-row justify-content-center flex-wrap">
-          {notes.length===0 ? 'No notes to display': notes.map((note) => {
-            return (
-              <NoteItem
-                key={note._id}
-                updateNote={updateNote}
-                note={note}
-              />
-            );
-          })}
+          {notes.length === 0
+            ? "No notes to display"
+            : notes.map((note) => {
+                return (
+                  <NoteItem
+                    key={note._id}
+                    updateNote={updateNote}
+                    note={note}
+                  />
+                );
+              })}
         </div>
       </div>
     </>
